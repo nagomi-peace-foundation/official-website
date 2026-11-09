@@ -1,0 +1,89 @@
+# GitHub Actions workflow to build and deploy static site to GitHub Pages
+# 一般財団法人なごみ平和財団 公式ホームページ
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate environment variables
+        env:
+          VITE_CONTACT_GAS_URL: ${{ secrets.VITE_CONTACT_GAS_URL || vars.VITE_CONTACT_GAS_URL }}
+        run: |
+          echo "=== [Pre-flight Check] Validating VITE_CONTACT_GAS_URL ==="
+          if [ -z "$VITE_CONTACT_GAS_URL" ]; then
+            echo "::error::CRITICAL: VITE_CONTACT_GAS_URL is not set in GitHub Secrets/Variables. Contact form submissions to Google Apps Script will fail."
+            exit 1
+          fi
+          if ! echo "$VITE_CONTACT_GAS_URL" | grep -Eq '^https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec'; then
+            echo "::error::CRITICAL: VITE_CONTACT_GAS_URL is invalid format ($VITE_CONTACT_GAS_URL). It must start with https://script.google.com/macros/s/ and end with /exec."
+            exit 1
+          fi
+          echo "VITE_CONTACT_GAS_URL is set and verified as valid Google Apps Script Web App exec URL."
+
+      - name: Type check (TypeScript)
+        run: npm run lint
+
+      - name: Build static site with Vite
+        env:
+          VITE_CONTACT_GAS_URL: ${{ secrets.VITE_CONTACT_GAS_URL || vars.VITE_CONTACT_GAS_URL }}
+        run: npm run build
+
+      - name: Verify build artifacts
+        run: |
+          echo "=== [Post-build Check] Verifying dist directory ==="
+          if [ ! -f "dist/index.html" ]; then
+            echo "::error::Build failed: dist/index.html does not exist."
+            exit 1
+          fi
+          if [ -f "dist/test_cors.html" ] || [ -f "dist/test_phase2.html" ]; then
+            echo "::error::Security leak: Test pages found in dist directory."
+            exit 1
+          fi
+          echo "dist directory verified successfully."
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

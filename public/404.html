@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>一般財団法人なごみ平和財団</title>
+    <script>
+      // Single Page Application redirect for GitHub Pages
+      // Supports both:
+      // 1) GitHub Pages project subdirectories (e.g., https://<org>.github.io/<repo>/path)
+      // 2) Custom domain apex / root (e.g., https://nagomi-zaidan.or.jp/path)
+      var l = window.location;
+      var isSubdir = l.hostname.endsWith('github.io');
+      var pathSegments = l.pathname.slice(1).split('/').filter(Boolean);
+
+      var basePath = '';
+      var routeSegments = pathSegments;
+
+      if (isSubdir && pathSegments.length > 0) {
+        // First segment is the GitHub repository name
+        basePath = '/' + pathSegments[0];
+        routeSegments = pathSegments.slice(1);
+      }
+
+      var route = routeSegments.join('/');
+      // Avoid infinite redirect if hitting index.html or 404.html directly
+      if (route === '404.html' || route === 'index.html') {
+        route = '';
+      }
+
+      var redirectUrl =
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        basePath +
+        (route ? '/#' + route : '/') +
+        (l.search ? l.search : '') +
+        l.hash;
+
+      l.replace(redirectUrl);
+    </script>
+  </head>
+  <body>
+    <p>リダイレクト中...</p>
+  </body>
+</html>

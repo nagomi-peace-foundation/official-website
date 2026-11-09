@@ -1,0 +1,8 @@
+{
+  "name": "一般財団法人なごみ平和財団 公式サイト（財団管理版）",
+  "description": "困難な状況にある方々の自立・回復・社会参加を支える民間支援活動への助成と基盤強化を行う、なごみ平和財団の公式サイトです。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

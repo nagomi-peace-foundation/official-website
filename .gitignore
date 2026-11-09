@@ -1,0 +1,28 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.aistudio/
+.env*
+!.env.example
+
+# Authentication & Sensitive Private Data (Must NOT be pushed to public repo)
+.auth_version_backup/
+*.zip
+nagomi_auth_version_backup.zip
+.approved_users.json
+.contact_submissions.json
+firebase-applet-config.json
+firebase-blueprint.json
+firestore.rules
+service-account*.json
+*.pem
+*.key
+
+# Test HTML tools (excluded from public repo and release distribution)
+public/test_cors.html
+public/test_phase2.html
+test_cors.html
+test_phase2.html

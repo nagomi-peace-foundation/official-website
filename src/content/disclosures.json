@@ -1,0 +1,52 @@
+[
+  {
+    "fiscalYear": "令和8年度（第1期：令和8年8月29日〜令和9年3月31日）",
+    "yearKey": "2026",
+    "isCurrent": true,
+    "statusNote": "準備中（第1期：令和8年8月29日〜令和9年3月31日）",
+    "categories": [
+      {
+        "categoryName": "定款【抜粋】・役員体制",
+        "documents": [
+          {
+            "title": "定款【抜粋】",
+            "fileType": "PDF",
+            "status": "available",
+            "fileDate": "令和8年7月30日作成",
+            "fileName": "一般財団法人なごみ平和財団_定款【抜粋】.pdf",
+            "description": "本定款はホームページ公開用として、附則等を省略した抜粋版です。正式な定款原本は当財団にて保管しています。",
+            "url": "/assets/aistudio/nagomi_teikan_public_final_b6e5d043.pdf",
+            "downloadUrl": "/assets/aistudio/nagomi_teikan_public_final_b6e5d043.pdf"
+          },
+          {
+            "title": "役員等名簿",
+            "fileType": "Web公開",
+            "status": "internal-link",
+            "linkTab": "about",
+            "linkAnchor": "officers",
+            "fileDate": "令和8年8月29日現在",
+            "description": "役員および評議員等の役職・氏名は、「財団について」ページの役員・評議員等にて公開しています（個人情報保護の観点から住所は掲載しておりません）。"
+          }
+        ]
+      },
+      {
+        "categoryName": "事業計画・収支予算",
+        "documents": [
+          { "title": "第1期 事業計画書", "fileType": "PDF", "status": "available", "fileDate": "令和8年8月29日策定", "fileName": "jigyo_keikakusho_r08.pdf" },
+          { "title": "第1期 収支予算書", "fileType": "PDF", "status": "available", "fileDate": "令和8年8月29日策定", "fileName": "shushi_yosansho_r08.pdf" }
+        ]
+      },
+      {
+        "categoryName": "決算・事業報告・監査（期末決算後に公表）",
+        "documents": [
+          { "title": "事業報告", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null },
+          { "title": "貸借対照表", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null },
+          { "title": "正味財産増減計算書（活動計算書）", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null },
+          { "title": "附属明細書", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null },
+          { "title": "財産目録", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null },
+          { "title": "監査報告", "fileType": "PDF", "status": "pending", "note": "準備中（第1期決算終了後公表）", "fileName": null }
+        ]
+      }
+    ]
+  }
+]
