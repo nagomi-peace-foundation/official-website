@@ -52,7 +52,7 @@ export const SEO: React.FC<SEOProps> = ({
       "@context": "https://schema.org",
       "@type": "NGO",
       "name": currentFullName,
-      "alternateName": foundation.nameCore,
+      "alternateName": [foundation.nameCore,"なごみ財団"],
       "description": foundation.purpose,
       "foundingDate": foundation.establishedDate,
       "founder": {
